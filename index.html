@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        ContactHub
+    </div>
+
+    <a href="add_contact.php" class="add-btn">
+        + Add Contact
+    </a>
+
+</header>
+
+<div class="container">
+
+    <div class="heading">
+
+        <h1>Contact Management</h1>
+
+        <p>Manage your contacts easily</p>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Actions</th>
+            </tr>
+
+            <tbody id="contactData">
+
+                <tr>
+                    <td colspan="6">Loading contacts...</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+function loadContacts() {
+
+    fetch("display_contacts.php")
+
+    .then(response => response.text())
+
+    .then(data => {
+        document.getElementById("contactData").innerHTML = data;
+    })
+
+    .catch(error => {
+        document.getElementById("contactData").innerHTML =
+        "<tr><td colspan='6'>Unable to load contacts.</td></tr>";
+    });
+
+}
+
+function confirmDelete() {
+    return confirm("Are you sure you want to delete this contact?");
+}
+
+loadContacts();
+
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
